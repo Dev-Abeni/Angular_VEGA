@@ -1,0 +1,41 @@
+<h2>Vehicles</h2>
+<p>
+  <button class="btn btn-primary" [routerLink]="['/vehicles/new']">New Vehicle</button>
+</p>
+
+<div class="col-sm-4">
+  <div class="form-group">
+    <label for="make">Make</label>
+    <select name="" id="make" class="form-control" [(ngModel)]="query.makeId" (change)="onFilterChange()">
+      <option value=""></option>
+      <option *ngFor="let m of makes" value="{{m.id}}">{{m.name}}</option>
+    </select>
+  </div>
+
+  <button class="btn btn-default" (click)="resetFilter()">Reset</button>
+</div>
+
+<br>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th (click)="sortBy('make')">Make <fa-icon [icon]="faSort"></fa-icon></th>
+      <th (click)="sortBy('model')">Model <fa-icon [icon]="faSort"></fa-icon></th>
+      <th (click)="sortBy('contactName')">Contact Name <fa-icon [icon]="faSort"></fa-icon></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let v of vehicles">
+      <td>{{v.id}}</td>
+      <td>{{v.make.name}}</td>
+      <td>{{v.model.name}}</td>
+      <td>{{v.contact.name}}</td>
+      <td>
+        <button class="btn btn-link" routerLink="/vehicles/{{v.id}}">View</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

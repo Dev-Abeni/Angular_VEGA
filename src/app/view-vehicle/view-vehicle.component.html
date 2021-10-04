@@ -1,0 +1,39 @@
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#vehicle" type="button" role="tab" aria-controls="vehicle" aria-selected="true">Vehicle</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#photo" type="button" role="tab" aria-controls="photo" aria-selected="false">Photos</button>
+  </li>
+</ul>
+
+<div class="tab-content" id="myTabContent" *ngIf="vehicle">
+  <div class="tab-pane fade show active" id="vehicle" role="tabpanel" aria-labelledby="vehicle-tab">
+    <br>
+    <h1>Basics</h1>
+    <ul>
+      <li>Make: {{vehicle.make.name}}</li>
+      <li>Model: {{vehicle.model.name}}</li>
+      <li>Registered: {{vehicle.isRegistered}}</li>
+    </ul>
+    <h1>Features</h1>
+    <ul>
+      <li *ngFor="let f of vehicle.features">{{f.name}}</li>
+    </ul>
+    <h1>Contact</h1>
+    <ul>
+      <li>Name: {{vehicle.contact.name}}</li>
+      <li>Phone: {{vehicle.contact.phone}}</li>
+      <li>Email: {{vehicle.contact.email}}</li>
+    </ul>
+    <button class="btn btn-primary" routerLink="/vehicles/edit/{{vehicle.id}}">Edit</button> &nbsp;
+    <button class="btn btn-danger" (click)="deleteVehicle()">Delete</button> &nbsp;
+    <button class="btn btn-default" routerLink="/vehicles">View All Vehicles</button>
+  </div>
+  <div class="tab-pane fade" id="photo" role="tabpanel" aria-labelledby="photo-tab">
+    <br>
+    <h1>Photo</h1>
+    <input type="file" (change)="uploadPhoto()" #fileInput>
+    <img *ngFor="let photo of photos" src="/uploads/{{ photo.fileName }}" class="img-thumbnail">
+  </div>
+</div>
